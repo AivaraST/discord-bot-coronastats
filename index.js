@@ -77,16 +77,15 @@ client.on('message', async (message) => {
         .setColor('#ff0000')
 
         .setTitle('COVID-19 ' + data.country_name + ' statistika')
-        .setDescription('Koronavirusai – tai didelė grupė virusų, kurie gali sukelti įvairias ligas. Dažniausiai koronavirusai sukelia lengvas ar net besimptomes infekcijas, tačiau gali sukelti ir sunkias kvėpavimo takų infekcijas. Naujajam koronavirusui būdingi į gripą panašūs simptomai: karščiavimas, kosulys, dusulys ir kiti kvėpavimo sutrikimai. Sunkesniais atvejais naujasis koronavirusas sukelia plaučių uždegimą, sunkų ūmų respiracinį sindromą, inkstų nepakankamumą ar mirtį. Prašome būti supratingais ir laikytis karantino, taip apsaugosite save, bei kitus.')
 
-        .addField('Paskutinį kartą atnaujinta', moment(data.record_date).format('YYYY-MM-D HH:mm:ss'))
-        .addField('Nauji susirgimai šiandieną', stats.new)
+        .addField('Nauji susirgimai', stats.new)
         .addField('Šiuo metų sergantys', stats.active, true)
         .addField('Pasveikę nuo viruso', stats.recovered, true)
         .addField('Mirę nuo viruso', stats.deaths, true)
         .addField('Iš viso virusu sirgo', stats.total)
         
         .setFooter(`Paskutinį kartą atnaujinta ${moment(data.record_date).format('YYYY-MM-D HH:mm:ss')}`);
+    
     message.channel.send(formatMessage);
 
     console.log(`[${message.guild.name}] used by ${message.author.username}`);
