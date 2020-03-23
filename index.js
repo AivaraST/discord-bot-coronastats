@@ -88,6 +88,8 @@ client.on('message', async (message) => {
         
         .setFooter(`Paskutinį kartą atnaujinta ${moment(data.record_date).format('YYYY-MM-D HH:mm:ss')}`);
     message.channel.send(formatMessage);
+
+    console.log("Command used by: ", message.client.name);
 });
 
 // Function to get data from API.
