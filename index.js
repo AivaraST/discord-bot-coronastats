@@ -65,25 +65,29 @@ client.on('message', async (message) => {
     }
 
     const stats = {
-        total: data.total_cases.length > 0 ? data.total_cases : 0,
-        active: data.active_cases.length > 0 ? data.active_cases : 0,
-        new: data.new_cases.length > 0 ? data.new_cases : 0,
-        recovered: data.total_recovered.length > 0 ? data.total_recovered : 0,
-        deaths: data.total_deaths.length > 0 ? data.total_deaths : 0
+        total: data.total_cases.length > 0 ? parseInt(data.total_cases.replace(/,/g, '')) : 0,
+        active: data.active_cases.length > 0 ? parseInt(data.active_cases.replace(/,/g, '')) : 0,
+        new: data.new_cases.length > 0 ? parseInt(data.new_cases.replace(/,/g, '')) : 0,
+        recovered: data.total_recovered.length > 0 ? parseInt(data.total_recovered.replace(/,/g, '')) : 0,
+        deaths: data.total_deaths.length > 0 ? parseInt(data.total_deaths.replace(/,/g, '')) : 0,
+        new_deaths: data.new_deaths.length > 0 ? parseInt(data.new_deaths.replace(/,/g, '')) : 0,
     };
-    
+
+    let deathRate = parseFloat(((stats.deaths / stats.total) * 100)).toFixed(2);
+    let recoverRate = parseFloat(((stats.recovered / stats.total) * 100)).toFixed(2);
+    console.log(stats.deaths, stats.recovered, stats.total);
     // Format and send message via discord bot;
     const formatMessage = new Discord.MessageEmbed()
         .setColor('#ff0000')
 
         .setTitle('COVID-19 ' + data.country_name + ' statistika')
 
-        .addField('Nauji susirgimai', stats.new)
-        .addField('Šiuo metų sergantys', stats.active, true)
-        .addField('Pasveikę nuo viruso', stats.recovered, true)
-        .addField('Mirę nuo viruso', stats.deaths, true)
-        .addField('Iš viso virusu sirgo', stats.total)
-        
+        .addField('Serga', `**${stats.active}** ${stats.new > 0 ? `(+${stats.new})` : ``}`, true)
+        .addField('Mirė', `**${stats.deaths}** ${stats.new_deaths > 0 ? `(+${stats.new_deaths})` : ``}`, true)
+        .addField('Pasveiko', `**${stats.recovered}**`, true)
+
+        .addField('Iš viso virusu sirgo', `**${stats.total}**`)
+
         .setFooter(`Paskutinį kartą atnaujinta ${moment(data.record_date).format('YYYY-MM-D HH:mm:ss')}`);
     
     message.channel.send(formatMessage);
