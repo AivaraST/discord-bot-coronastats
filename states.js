@@ -460,7 +460,7 @@ exports.states = [
         "code": "HT"
     },
     {
-        "name": "Holy See (Vatican City State)",
+        "name": "Vatican City",
         "dial_code": "+379",
         "code": "VA"
     },
