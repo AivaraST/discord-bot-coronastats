@@ -45,7 +45,7 @@ client.on('message', async (message) => {
         return;
     }
 
-    // Check is input is only country code ;
+    // Check is input is only country code a;
     statesData.states.map((state) => {
         if(state.code.toLowerCase() === country.toLowerCase()) {
             country = state.name; 
