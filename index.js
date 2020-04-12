@@ -23,9 +23,9 @@ const BOT_COMMAND = '!costats';
 client.on('message', async (message) => {
     
     // Check is message in channel which name has 'covid';
-    if(message.channel.name.search('covid') == -1) {
-        return;
-    }
+    // if(message.channel.name.search('covid') == -1) {
+    //     return;
+    // }
 
     // Extract message;
     let splitMessage = message.content.split(' ');
